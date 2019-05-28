@@ -6,6 +6,9 @@
 *.ko
 *.obj
 *.elf
+*.tar
+*.bz2
+*.zip
 
 # Linker output
 *.ilk
