@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/bin/mount -t yaffs /dev/mtdblock3 /usr/yaffs/
+

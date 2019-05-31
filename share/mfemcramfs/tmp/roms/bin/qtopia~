@@ -1,0 +1,34 @@
+#!/bin/sh
+
+echo Start Qtopia-2.2.0
+
+export set TSLIB_TSDEVICE=/dev/event1
+export set TSLIB_CONFFILE=/etc/ts.conf
+export set TSLIB_PLUGINDIR=/lib/ts
+export set TSLIB_CALIBFILE=/tmp/pointercal
+
+export set HOME=/tmp
+export set QTDIR=/opt/Qtopia
+export set QPEDIR=/opt/Qtopia
+export set KDEDIR=/opt/kde
+export set QWS_SIZE=800x600
+export set QWS_KEYBOARD="USB:/dev/event2"
+export set QWS_MOUSE_PROTO="TPanel:/dev/event1"
+export set PATH=$QPEDIR/bin:$PATH
+export set LD_LIBRARY_PATH=$QTDIR/lib:$QPEDIR/lib
+
+mknod -m 666 /tmp/null c 1 3
+
+   cp -f /usr/yaffs/pointercal /tmp
+
+
+
+if [ -f /tmp/pointercal ] ; then
+	#$QPEDIR/bin/qpe > /tmp/null 2>/tmp/null
+	$QPEDIR/bin/qpe
+else
+	ts_calibrate
+        cp -f /tmp/pointercal /usr/yaffs
+	$QPEDIR/bin/qpe -qws
+fi
+
